@@ -6,7 +6,7 @@ export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const body = request.json();
+  const body = await request.json();
   const validation = schema.safeParse(body);
   if (!validation.success)
     return NextResponse.json(validation.error.format(), { status: 400 });
@@ -16,11 +16,11 @@ export async function PATCH(
   });
 
   if (!issue)
-    return NextResponse.json({ error: "Invalid issue" }, { status: 400 });
+    return NextResponse.json({ error: "Invalid issue" }, { status: 404 });
 
-  const updateIssue = prisma.issue.update({
+  const updateIssue = await prisma.issue.update({
     where: { id: issue.id },
-    data: { title: issue.title, description: issue.description },
+    data: { title: body.title, description: body.description },
   });
 
   return NextResponse.json(updateIssue);
