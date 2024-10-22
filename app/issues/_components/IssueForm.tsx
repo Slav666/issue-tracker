@@ -19,7 +19,7 @@ const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
 
 type IssueFormData = z.infer<typeof schema>;
 
-const IssueForm = ({ issue }: {issue?: Issue}) => {
+const IssueForm = ({ issue }: { issue?: Issue }) => {
   const router = useRouter();
   const {
     register,
@@ -45,7 +45,8 @@ const IssueForm = ({ issue }: {issue?: Issue}) => {
         onSubmit={handleSubmit(async (data) => {
           try {
             setIsSubmitted(true);
-            await axios.post("/api/issues", data);
+            if (issue) await axios.patch("/api/issues/" + issue.id, data);
+            else await axios.post("/api/issues", data);
             router.push("/issues");
           } catch (error) {
             setIsSubmitted(false);
@@ -69,7 +70,7 @@ const IssueForm = ({ issue }: {issue?: Issue}) => {
         />
         {<ErrorMessage>{errors.description?.message}</ErrorMessage>}
         <Button disabled={isSubmitted}>
-          Submit New Issue
+          {issue ? "Update issue" : "Submit New Issue"}{" "}
           {isSubmitted && <Spinner />}
         </Button>
       </form>
