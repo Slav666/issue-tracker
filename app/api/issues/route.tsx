@@ -3,7 +3,6 @@ import prisma from "@/prisma/client";
 import { schema } from "../../ValidationSchema";
 
 
-
 export async function POST(request: NextRequest) {
   const body = await request.json();
   const validation = schema.safeParse(body);
