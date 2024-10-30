@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import prisma from "@/prisma/client";
 import { Grid, Box, Flex } from "@radix-ui/themes";
 import IssueDetail from "./IssueDetail";
@@ -11,8 +11,16 @@ interface Props {
 }
 
 const IssueDetailPage = async ({ params }: Props) => {
+  // Ensure id is parsed correctly and is a valid number
+  const issueId = parseInt(params.id, 10);
+  if (isNaN(issueId)) {
+    console.error("Invalid issue ID:", params.id);
+    notFound();
+  }
+
+  // Fetch the issue from the database
   const issue = await prisma.issue.findUnique({
-    where: { id: parseInt(params.id) },
+    where: { id: issueId },
   });
 
   if (!issue) notFound();
