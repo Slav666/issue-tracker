@@ -15,6 +15,7 @@ import { Issue } from "@prisma/client";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
+  loading: () => <p>Loading...</p>,
 });
 
 type IssueFormData = z.infer<typeof schema>;
@@ -65,9 +66,13 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           defaultValue={issue?.description}
           name="description"
           control={control}
-          render={({ field }) => (
-            <SimpleMDE placeholder="Description" {...field} />
-          )}
+          render={({ field }) => {
+            const { ref, ...rest } = field; // removes ref
+            return <SimpleMDE placeholder="Enter the description" {...rest} />;
+          }}
+          // render={({ field }) => (
+          //   <SimpleMDE placeholder="Description" {...field} />
+          // )}
         />
         {<ErrorMessage>{errors.description?.message}</ErrorMessage>}
         <Button disabled={isSubmitted}>
