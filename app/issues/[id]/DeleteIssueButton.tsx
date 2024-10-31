@@ -3,7 +3,6 @@
 import React from "react";
 import { Button, AlertDialog, Flex } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import axios from "axios";
 
 const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
