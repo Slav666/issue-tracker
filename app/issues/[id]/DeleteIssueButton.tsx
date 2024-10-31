@@ -34,7 +34,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
                 color="red"
                 onClick={async () => {
                   await axios.delete("/api/issues/" + issueId);
-                  router.push("/issues");
+                  router.push("/issues/list");
                   router.refresh();
                 }}
               >
