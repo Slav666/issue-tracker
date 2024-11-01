@@ -11,7 +11,6 @@ import {
   Cell,
 } from "recharts";
 import React from "react";
-import IssueStatusBadge from "./components/IssueStatusBadge";
 
 interface Props {
   open: number;
