@@ -1,7 +1,11 @@
-import Image from "next/image";
-import Pagination from "./components/Pagination";
+import React from "react";
+import LatestIssues from "./LatestIssues";
 
-
-export default function Home() {
-  return <Pagination itemCount={100} pageSize={10} currentPage={2} />;
+export default async function Home() {
+  return (
+    <div>
+      {/* @ts-expect-error Server Component */}
+      <LatestIssues />
+    </div>
+  );
 }
