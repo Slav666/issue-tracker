@@ -1,18 +1,12 @@
 import React from "react";
-import prisma from "@/prisma/client";
 import { Table, Flex, Avatar, Card, Heading } from "@radix-ui/themes";
 import Link from "next/link";
 import IssueStatusBadge from "./components/IssueStatusBadge";
-
-const LatestIssues = async () => {
-  const issues = await prisma.issue.findMany({
-    orderBy: { createdAt: "desc" },
-    take: 5,
-    include: {
-      assignedToUser: true,
-    },
-  });
-
+import { Issue, User } from "@prisma/client";
+interface LatestIssuesProps {
+  issues: (Issue & { assignedToUser: User | null })[];
+}
+const LatestIssues: React.FC<LatestIssuesProps> = ({ issues }) => {
   return (
     <Card>
       <Heading align="center">Latest Issues</Heading>
@@ -28,7 +22,7 @@ const LatestIssues = async () => {
                   </Flex>
                   {issue.assignedToUser && (
                     <Avatar
-                      src={issue.assignedToUser.image!}
+                      src={issue.assignedToUser.image || ""}
                       fallback="?"
                       size="2"
                       radius="full"
