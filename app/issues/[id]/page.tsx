@@ -1,4 +1,4 @@
-// import React from "react";
+import React from "react";
 import prisma from "@/prisma/client";
 import { Grid, Box, Flex } from "@radix-ui/themes";
 import IssueDetail from "./IssueDetail";

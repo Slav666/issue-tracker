@@ -2,7 +2,6 @@ import { Status } from "@prisma/client";
 import { Card, Flex, Text } from "@radix-ui/themes";
 import Link from "next/link";
 import React from "react";
-import prisma from "@/prisma/client";
 
 interface Props {
   open: number;
@@ -11,7 +10,6 @@ interface Props {
 }
 
 const IssueSummary = ({ open, inProgress, closed }: Props) => {
-
   const containers: {
     label: string;
     value: number;

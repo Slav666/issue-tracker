@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import "easymde/dist/easymde.min.css";
@@ -70,9 +71,6 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
             const { ref, ...rest } = field; // removes ref
             return <SimpleMDE placeholder="Enter the description" {...rest} />;
           }}
-          // render={({ field }) => (
-          //   <SimpleMDE placeholder="Description" {...field} />
-          // )}
         />
         {<ErrorMessage>{errors.description?.message}</ErrorMessage>}
         <Button disabled={isSubmitted}>
