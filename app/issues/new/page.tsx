@@ -1,4 +1,5 @@
 import IssueForm from "../_components/IssueForm";
+
 const NewIssuesPage = () => {
   return <IssueForm />;
 };
